@@ -6,26 +6,29 @@ const products = [
     { name: "pants", price: 60, variant: ["small", "medium", "large"]}
 ]
 
-
+//  SEED DUMMY COLLECTION
 const seedProducts = async () => {
     const col = firestore.collection("products");
     const data = await col.get();
     if (data.size > 0) {
         return;
     }
+    // if nothing in collection
     const promises = products.map(async (products) => {
         return await col.add(products);
     })
-    
     const resolvedReferences = await Promise.all(promises)
 }
+
 
 export const getProducts = async () => {
     await seedProducts();
     const col = firestore.collection("products");
+    // grab all the records
     const queryData = await col.get();
+    // format 
     const documents = queryData.docs;
-    return documents.map((doc) => ({id: doc.id, ...doc.data}));
+    return documents.map((doc) => ({id: doc.id, ...doc.data() }));
 }
 
 export const deleteProducts = async (id) => {

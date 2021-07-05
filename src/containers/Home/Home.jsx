@@ -1,10 +1,21 @@
 import React from 'react'
+import Navbar from '../../components/Navbar';
+import Carousel from '../../components/Carousel'
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import Grid from '../../components/Grid';
+import { CarouselImages } from '../../assets/CarouselImages';
 
-const Home = props => {
+const Home = () => {
     return (
-        <section>
-            <h1> Home Page </h1>
-        </section>
+        <>
+            <Header />
+            <Navbar />
+
+            <Carousel slides={CarouselImages}/>
+            <Grid />
+            <Footer />
+        </>
     )
 }
 

@@ -1,0 +1,35 @@
+.resize {
+    width: 250px;
+    height: 200px;
+}
+
+.cardWrapper {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+// Card > img {
+//     &:hover {
+//         cursor: pointer;
+//         transform: scale(1.2);
+//     }
+// }
+
+// display: grid;
+
+// @include media.phone {
+//     grid-template-columns: 1fr;
+// }
+
+// @include media.tablet {
+//     grid-template-columns: repeat(2, 1fr);
+// }
+
+// @include media.tablet-landscape {
+//     grid-template-columns: repeat(2, 1fr);
+// }
+
+// @include media.laptop {
+//     grid-template-columns: repeat(3, 1fr);
+// }
