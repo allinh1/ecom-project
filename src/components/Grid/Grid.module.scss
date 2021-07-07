@@ -1,5 +1,5 @@
 .resize {
-    width: 250px;
+    width: auto;
     height: 200px;
 }
 
@@ -9,6 +9,14 @@
     grid-gap: 10px;
 }
 
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start ;
+    align-content: center;
+    justify-content: space-between;
+    
+}
 // Card > img {
 //     &:hover {
 //         cursor: pointer;

@@ -4,7 +4,7 @@ import styles from './Header.module.scss'
 const Header = () => {
     return (
         <div>
-            <header className={styles.header}> I am a header component
+            <header className={styles.header}>  Ecommerce Store
             </header>
         </div>
     )

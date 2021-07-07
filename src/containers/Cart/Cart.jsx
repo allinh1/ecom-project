@@ -1,87 +1,70 @@
 import { React, useState, useEffect } from 'react'
-import Counter from '../../components/Counter'
-import { getCart } from '../../services/cart'
+// import Counter from '../../components/Counter'
+import { getCart, deleteCartItem, deleteItem } from '../../services/cart'
+import styles from './Cart.module.scss'
+import Navbar from '../../components/Navbar/Navbar';
 
+const Cart = () => {
+        const [cart, setCart] = useState([]);
+        // const [itemQuantity , setQuantitiy] = useState()
 
-const Cart = (item, onDelete) => {
-        const [cartItem, setCartItem] = useState([]);
-        const [itemQuantity , setQuantitiy] = useState(item.itemQuantity || 0)
-        
-        useEffect(() => {
-          const getData = async () => {
+        const getData = async () => {
             const data = await getCart();
-            setCartItem(data);
-            console.log(data);
+            setCart(data);
         };
+
+        useEffect(() => {
             getData();
         }, []);
 
-
-        const handleDelete = (event) => {
-            onDelete(item.id)
+        const handleDelete = async (id) => {
+            await deleteCartItem(id)
+            getData()
         };
 
+        // const handleDelete = async (id) => {
+        //     deleteCartItem(colleague.id);
+        // };
 
-    return (
-        <>
-        <div> Cart Page/Title </div>
 
-        {cartItem.map((item) => (
-        <div key={item.id}>
-            <h4>{item.productId}</h4>
-            <p>{item.quantity} {item.variant}</p>
-        </div>
-        ))}
 
-        <div>
-            <button onClick={handleDelete}>Delete</button>
-        </div>
-
-        <Counter value={itemQuantity} onChange={setQuantitiy}/>
-        </>
-    )
-}
+        return (
+            <>
+                <Navbar />
+                <div>
+                    <h1>Cart</h1>
+                </div>
+                    {cart.map((product) => (
+                        <div key={product.id} className={styles.cartProduct}>
+                        <h4> id: {product.id} </h4>
+                        <p>Product: {product.name}</p>
+                        <o>Price: {product.price}</o>
+                        <p>Type: {product.variant}</p>
+                        <button onClick={() => handleDelete(product.id)}>Delete</button>
+                        </div>
+                    ))}
+            </>
+        );
+};
 
 export default Cart;
 
 
 
 
+// <div className={styles.item}>
+// {cart.map((product) => (
+// <div key={product.id}>
+//     <h4>
+//     id: {product.id}
+//     </h4>
+//     <p>Product: {product.name}</p>
+//     <p>Type: {product.variant}</p>
 
+//     <button onClick={() => handleDelete(product.id)}>Delete</button>
+//     {/* <Counter value={itemQuantity} onChange={setQuantitiy}/> */}
+//     <br></br>
+// </div>
+// ))};
 
-
-// import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { getColleague } from "../../services/colleagues";
-
-// const Cart = () => {
-//     const { id } = useParams();
-//     const [colleague, setColleague] = useState(undefined);
-
-//     useEffect(() => {
-//         const getData = async () => {
-//             const data = await getColleague(id);
-//             setColleague(data);
-//         };
-
-//         getData();
-//     }, []);
-
-//     return (
-//         <>
-//             {colleague ? (
-//                 <div>
-//                     <h1>
-//                         {colleague.firstName} {colleague.lastName}
-//                     </h1>
-//                 </div>
-//             ) : (
-//                 <p>
-//                     Colleague with id ={">"} {id} does not exist
-//                 </p>
-//             )}
-//         </>
-//     );
-// };
-
-// export default Cart;
+// </div>
