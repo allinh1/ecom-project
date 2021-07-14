@@ -1,48 +1,37 @@
-import { React, useState, useEffect } from 'react'
-// import Counter from '../../components/Counter'
-import { getCart, deleteCartItem, deleteItem } from '../../services/cart'
+import { useEffect, useContext } from 'react'
+import {CartContext} from '../../context/context'
+import { deleteCartItem } from '../../services/cart'
 import styles from './Cart.module.scss'
 import Navbar from '../../components/Navbar/Navbar';
+import CartCard from '../../components/CartCard/CartCard';
+
 
 const Cart = () => {
-        const [cart, setCart] = useState([]);
-        // const [itemQuantity , setQuantitiy] = useState()
 
-        const getData = async () => {
-            const data = await getCart();
-            setCart(data);
-        };
+    const { cart, getCartItems } = useContext(CartContext)
 
-        useEffect(() => {
-            getData();
-        }, []);
+    const handleDelete = (CartId) =>{
+        deleteCartItem(CartId)
+        getCartItems();
+    }
 
-        const handleDelete = async (id) => {
-            await deleteCartItem(id)
-            getData()
-        };
-
-        // const handleDelete = async (id) => {
-        //     deleteCartItem(colleague.id);
-        // };
-
+    useEffect(() => {
+        getCartItems();
+    },[cart])
 
 
         return (
             <>
                 <Navbar />
-                <div>
-                    <h1>Cart</h1>
-                </div>
-                    {cart.map((product) => (
-                        <div key={product.id} className={styles.cartProduct}>
-                        <h4> id: {product.id} </h4>
-                        <p>Product: {product.name}</p>
-                        <o>Price: {product.price}</o>
-                        <p>Type: {product.variant}</p>
-                        <button onClick={() => handleDelete(product.id)}>Delete</button>
-                        </div>
-                    ))}
+                    <div>
+                        <h1>Cart</h1>
+                    </div>
+
+                    <div>
+                    {cart.map((item) => {
+                        return <CartCard key={item.id} product={item} onDelete={handleDelete}/>;
+                    })} 
+                    </div>
             </>
         );
 };

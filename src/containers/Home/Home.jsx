@@ -1,5 +1,6 @@
 import { useState , useEffect } from "react";
-import { getProducts, addToCart, addProduct } from '../../services/product'
+import { getProducts } from '../../services/product'
+import styles from './Home.module.scss'
 
 import React from 'react'
 import Navbar from '../../components/Navbar';
@@ -7,43 +8,44 @@ import Carousel from '../../components/Carousel'
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Grid from '../../components/Grid';
+import Card from '../../components/Card';
 import { CarouselImages } from '../../assets/CarouselImages';
 
 
-const Home = () => {
-    const [products, setProducts] = useState([]);
-    const getData = async () => {
-        const data = await getProducts();
-        setProducts(data)
-    };
+const Home = ({category=null}) => {
 
+    const [items, setItems] = useState([]);
+
+    const getProductData = async () => {
+      const data = await getProducts();
+
+      if (category){
+        const filtered = data.filter((product) => {
+          return product.category === category;
+        })
+        setItems(filtered);
+      } else {
+          setItems(data);
+      }
+    };
+  
     useEffect(() => {
-        getData();
-    }, []);
+      getProductData();
+    },[category]);
 
-    const handleAddToCart = async (product) => {
-        await addProduct(product);
-        getData()
-    };
 
     return (
         <>
             <Header />
             <Navbar />
-
             <Carousel slides={CarouselImages}/>
-            
+            <div className={styles.Grid}>
+                {items.map((product) => {
+                    return <Card key={product.id} products={product}/>;
+                })}
+            </div>
+    
             <Grid />
-            {products.map((product) => (
-                <div key={products.id}>
-                    <h2>{product.name}</h2>
-                    <p>${product.price}</p>
-                    <button onClick={() => handleAddToCart(product)}>
-                        Add to Cart
-                    </button>
-                </div>
-                ))}
-
             <Footer />
         </>
     )

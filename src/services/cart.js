@@ -1,30 +1,10 @@
 import firestore from "../firestore.js"
 
-const cartProducts = [
-    { productId: "", name: "cart", products: "" },
-    { productId: "", name: "cart", products: "" },
-    { productId: "", name: "cart", products: "" },
-
-]
-
-const seedCart = async () => {
-    const col = firestore.collection("cart");
-    const data = await col.get();
-    if (data.size > 0) {
-        return;
-    };
-    const promises = cartProducts.map(async (cartProducts) => {
-        return await col.add(cartProducts);
-    });
-    const resolvedReferences = await Promise.all(promises)
-;}
-
 export const getCart = async () => {
-    await seedCart();
     const col = firestore.collection("cart");
     const queryData = await col.get();
     const documents = queryData.docs;
-    return documents.map((doc) => ({id: doc.id, ...doc.data() }));
+    return documents.map((doc) => ({CartId: doc.id, ...doc.data() }));
 }
 
 export const deleteCartItem = async (id) => {
@@ -32,33 +12,33 @@ export const deleteCartItem = async (id) => {
     await col.delete();
 }
 
-export const updateCart= async (id, record) => {
+export const updateCartItem= async (id, record) => {
     const col = firestore.collection("cart").doc(id);
     await col.update(record);
 };
 
-export const createCart = async (record) => {
+export const addToCart = async (product) => {
     const col = firestore.collection("cart");
-    await col.add(record);
-};
-
-export const deleteProducts = async (id) => {
-    const col = firestore.collection("products").doc(id);
-    await col.delete();
+    await col.add(product);
 }
 
-// D in CRUD
-export const deleteItem = async (id) => {
-    const col = firestore.collection("cart").doc(id);
-    await col.delete();
-};
+// collection 'cart' docid = ('1') , record = {products}
+// remove field from document.
+// For AddToCart Function 
+// - Add to cart
+// - remove ID field using update method in cart collection
+// -> Destructure product to remove id field
+// const newProd = {product.id, ...product }
+// -> use newProduct (without id field) as record param for update method
 
-// U in CRUD
-export const updateColleagues = async (id, record) => {
-    const ref = firestore.collection("colleagues").doc(id);
-    await ref.update(record);
-};
 
-// const handleDelete = (event) => {
-//     onDelete(colleague.id);
-// };
+// // Update
+// export const updateCart = async(id, record) => {
+//     const ref = firestore.collection("Cart").doc('43ty326cGjecu3EJvSOX').collection('cart-instance-01').doc(id);
+//     await ref.update(record);
+// }
+
+// // Delete
+// export const removeFromCart = async(id) => {
+//     const collection = firestore.collection("Cart").doc('43ty326cGjecu3EJvSOX').collection('cart-instance-01').doc(id);
+//     await collection.delete()

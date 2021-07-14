@@ -16,7 +16,7 @@ const Grid = () => {
           <Card.Body>
             <Card.Title>Hats</Card.Title>
             <Card.Text>Hats Text</Card.Text>
-            <Button variant="success">Add to Cart</Button>
+            <Button variant="success">See More</Button>
           </Card.Body>
         </Card>
 
@@ -28,7 +28,7 @@ const Grid = () => {
           <Card.Body className={styles.body}>
             <Card.Title>Shoes</Card.Title>
             <Card.Text>Shoes Text</Card.Text>
-            <Button variant="danger">Add to Cart</Button>
+            <Button variant="danger">See More</Button>
           </Card.Body>
         </Card>
 
@@ -40,7 +40,7 @@ const Grid = () => {
           <Card.Body>
             <Card.Title>Pants</Card.Title>
             <Card.Text>Pants Text</Card.Text>
-            <Button variant="secondary">Add to Cart</Button>
+            <Button variant="secondary">See More</Button>
           </Card.Body>
         </Card>
 
@@ -52,7 +52,7 @@ const Grid = () => {
           <Card.Body>
             <Card.Title>Shirts</Card.Title>
             <Card.Text>Shirts Text</Card.Text>
-            <Button variant="primary">Add to Cart</Button>
+            <Button variant="primary">See More</Button>
           </Card.Body>
         </Card>
       </div>

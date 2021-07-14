@@ -1,42 +1,33 @@
 import { useEffect, useState } from "react";
 import styles from "./Card.module.scss";
-import Counter from "../Counter";
+import { addToCart } from "../../services/cart";
 
 
-const Card = (products, onDelete, onChange ) => {
+const Card = ( {products} ) => {
+  const [ cartRecord, setCartRecord ] = useState()
 
-    const [itemQuantity , setQuantitiy] = useState(products.itemQuantity || 0)
+  const handleClick = () => {
+      addToCart(cartRecord);
+  }
 
+  useEffect(() => {
+      const {...record} = products;
+      setCartRecord({...record, quantity: 1});
+  }, [products])
 
-    // useEffect(() => {
-    //     onChange({
-    //         ...products,
-    //         quantity: itemQuantity,
-    //     });
-    // }, [itemQuantity]);
-
-
-     const handleDelete = (event) => {
-         onDelete(products.id)
-     };
-
-    return (
-        <>
-            <div className={styles.Card}>
-
-                <h2>{products.name}</h2>
-                <h3>{products.price}</h3>
-
-            </div>
-            <button onClick={handleDelete}>Delete</button>
-
-            <div>
-                <Counter value={itemQuantity} onChange={setQuantitiy} />
-            </div>
-
-        </>
-    );
-
-};
+  return (
+    <div>
+        <div className={styles.Card_Container}>
+            <img src='https://via.placeholder.com/150'></img>
+          <div className={styles.Card_Content}>
+            <div>{products.id} {products.itemName}</div>
+            <div>{products.variant}</div>
+            <div>$ {products.price}</div>
+          </div>
+            <button onClick={handleClick}>Add to Cart</button>
+        </div>
+    </div>
+)
+}
 
 export default Card
