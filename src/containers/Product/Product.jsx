@@ -1,32 +1,29 @@
-
-// import { useParams } from "react-router-dom"
-import React from 'react'
-import { getProducts } from '../../services/product';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"
+import { getProductById } from '../../services/product';
+import ProductCard from "../../components/ProductCard";
 
 const Product = () => {
-    const [product, setProduct] = useState();
 
-    useEffect(() => {
-        const getData = async () => {
-            const data = await getProducts();
-            setProduct(data)
-        };
-        getData();
-    }, []);
+    const { id } = useParams();
+    const [product, setProduct] = useState([]);
 
+    const fetchItem = async() => {
+        const data = await getProductById(id)
+        setProduct(data);
+    }
 
+    useEffect(() =>{
+      fetchItem();
+    },[]);
 
     return (
         <>
-            {product ? (
-                <div>
-                    <h1>
-                        {product.name} {product.price}
-                    </h1>
-                </div>
-            ) : (
-                <p>Product with id: {id} does not exist</p>
-            )};
+        <div>
+            {product.map((item) => {
+                return <ProductCard key={item.id} product={item} />;
+            })}
+        </div>
         </>
     );
 };

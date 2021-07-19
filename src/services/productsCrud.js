@@ -1,20 +1,20 @@
-import firestore from "../../firestore.js";
+// import firestore from "../../firestore.js";
 
-// Read
-export const getProducts = async () => {
-    const collection = firestore.collection("products");
-    const queryData = await collection.get();
-    const docArray = queryData.docs;
-    const products = docArray.map((doc) => ({ id: doc.id, ...doc.data()}))
-    return products;
-};
+// // Read
+// export const getProducts = async () => {
+//     const collection = firestore.collection("products");
+//     const queryData = await collection.get();
+//     const docArray = queryData.docs;
+//     const products = docArray.map((doc) => ({ id: doc.id, ...doc.data()}))
+//     return products;
+// };
 
-export const getProductById = async (id) => {
-    const collection = firestore.collection("products").doc(id)
+// export const getProductById = async (id) => {
+//     const collection = firestore.collection("products").doc(id)
 
-    const itemData = await collection.get()
+//     const itemData = await collection.get()
 
-    const productArr = [{id: itemData.id, ...itemData.data()}]
+//     const productArr = [{id: itemData.id, ...itemData.data()}]
 
-    return productArr;
-}
+//     return productArr;
+// }

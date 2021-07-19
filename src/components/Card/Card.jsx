@@ -20,7 +20,8 @@ const Card = ( {products} ) => {
         <div className={styles.Card_Container}>
             <img src='https://via.placeholder.com/150'></img>
           <div className={styles.Card_Content}>
-            <div>{products.id} {products.itemName}</div>
+            <div>{products.id} </div>
+            <div>{products.name}</div>
             <div>{products.variant}</div>
             <div>$ {products.price}</div>
           </div>

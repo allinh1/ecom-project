@@ -16,18 +16,16 @@ const CartCard = ({ product, onDelete }) => {
 
     useEffect(() => {
         handleQuantityChange();
-        fetchQuantity();
+        // fetchQuantity();
     },[itemQuantity])
 
     return (
         <div className={styles.CartCard_Container}>
-            <div>
-                <img src='https://via.placeholder.com/150'></img>
             <div className={styles.Card_Content}>
-                <div>{product.id} {product.name}</div>
+                <img src='https://via.placeholder.com/150'></img>
+                <div>{product.name}</div>
                 <div>{product.variant}</div>
                 <div>${product.price}</div>
-            </div>
                 <Counter onChange={setItemQuantity} value={itemQuantity}/>
                 <button onClick={handleDelete}>REMOVE</button>
             </div>

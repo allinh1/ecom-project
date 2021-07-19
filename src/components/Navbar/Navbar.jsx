@@ -7,9 +7,9 @@ const Navbar = () => {
 
         <div className={styles.container}>
              <nav className={styles.Navbar}>
-                    <Link to="/"> Home </Link>
-                    <Link to="products/:id"> Products </Link>
-                    <Link to="/cart"> Cart </Link>
+                    <Link className={styles.Navbar_item} to="/"> Home </Link>
+                    <Link className={styles.Navbar_item} to="products/:id"> Products </Link>
+                    <Link className={styles.Navbar_item} to="/cart"> Cart </Link>
              </nav>
         </div>
     )

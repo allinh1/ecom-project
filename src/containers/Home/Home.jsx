@@ -12,33 +12,39 @@ import Card from '../../components/Card';
 import { CarouselImages } from '../../assets/CarouselImages';
 
 
-const Home = ({category=null}) => {
+// const Home = ({category=null}) => {
+
+  const Home = () => {
 
     const [items, setItems] = useState([]);
 
     const getProductData = async () => {
       const data = await getProducts();
-
-      if (category){
-        const filtered = data.filter((product) => {
-          return product.category === category;
-        })
-        setItems(filtered);
-      } else {
-          setItems(data);
-      }
+      setItems(data)
     };
+  
+
+    //   if (category){
+    //     const filtered = data.filter((product) => {
+    //       return product.category === category;
+    //     })
+    //     setItems(filtered);
+    //   } else {
+    //       setItems(data);
+    //   }
+    // };
   
     useEffect(() => {
       getProductData();
-    },[category]);
-
+    },[]);
+  
 
     return (
         <>
             <Header />
             <Navbar />
             <Carousel slides={CarouselImages}/>
+            
             <div className={styles.Grid}>
                 {items.map((product) => {
                     return <Card key={product.id} products={product}/>;

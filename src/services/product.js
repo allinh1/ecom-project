@@ -2,21 +2,6 @@ import firestore from "../firestore.js"
 import 'firebase/firestore';
 
 // CREATE
-export const createProducts = async (record) => {
-    const col = firestore.collection("products");
-    await col.add(record);
-
-    // export const addToCart = async (product) => {
-    //     const collection = firestore.collection("Cart").doc('43ty326cGjecu3EJvSOX').collection('cart-instance-01')
-    //     collection.add(product)
-    // }
-};
-
-export const addProduct = async (record) => {
-    const col = firestore.collection("cart")
-    await col.add(record)
-};
-
 export const addCartItem = async (record) => {
     const col = firestore.collection("cart");
     await col.add(record);
@@ -29,6 +14,13 @@ export const getProducts = async () => {
     const queryData = await col.get();
     const documents = queryData.docs;
     return documents.map((doc) => ({id: doc.id, ...doc.data() }));
+}
+
+export const getProductById = async (id) => {
+    const col = firestore.collection("products").doc(id)
+    const productData = await col.get()
+    const productArr = [{id: productData.id, ...productData.data()}]
+    return productArr;
 }
 
 // UPDATE

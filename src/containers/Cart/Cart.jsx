@@ -26,12 +26,14 @@ const Cart = () => {
                     <div>
                         <h1>Cart</h1>
                     </div>
-
-                    <div>
-                    {cart.map((item) => {
-                        return <CartCard key={item.id} product={item} onDelete={handleDelete}/>;
-                    })} 
+                    <div className={styles.CartContainer}>
+                        <div className={styles.CartGrid}>
+                        {cart.map((item) => {
+                            return <CartCard key={item.id} product={item} onDelete={handleDelete}/>;
+                        })} 
+                        </div>
                     </div>
+
             </>
         );
 };

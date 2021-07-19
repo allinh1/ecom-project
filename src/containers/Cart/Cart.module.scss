@@ -1,0 +1,10 @@
+.CartGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.CartContainer {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
