@@ -20,42 +20,23 @@ const Cart = () => {
     },[cart])
 
 
-        return (
-            <>
-                <Navbar />
-                    <div>
-                        <h1>Cart</h1>
+    return (
+        <>
+            <Navbar />
+                <div>
+                    <h1>Cart</h1>
+                </div>
+                <div className={styles.CartContainer}>
+                    <div className={styles.CartGrid}>
+                    {cart.map((item) => {
+                        return <CartCard key={item.id} product={item} onDelete={handleDelete}/>;
+                    })} 
                     </div>
-                    <div className={styles.CartContainer}>
-                        <div className={styles.CartGrid}>
-                        {cart.map((item) => {
-                            return <CartCard key={item.id} product={item} onDelete={handleDelete}/>;
-                        })} 
-                        </div>
-                    </div>
+                </div>
 
-            </>
-        );
+        </>
+    );
 };
 
 export default Cart;
 
-
-
-
-// <div className={styles.item}>
-// {cart.map((product) => (
-// <div key={product.id}>
-//     <h4>
-//     id: {product.id}
-//     </h4>
-//     <p>Product: {product.name}</p>
-//     <p>Type: {product.variant}</p>
-
-//     <button onClick={() => handleDelete(product.id)}>Delete</button>
-//     {/* <Counter value={itemQuantity} onChange={setQuantitiy}/> */}
-//     <br></br>
-// </div>
-// ))};
-
-// </div>

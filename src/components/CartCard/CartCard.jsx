@@ -31,8 +31,8 @@ const CartCard = ({ product, onDelete }) => {
             </div>
         </div>
 
-        )
-    }
+    )   
+}
     
 export default CartCard
 

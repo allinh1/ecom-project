@@ -1,31 +1,41 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"
-import { getProductById } from '../../services/product';
+import { useParams } from "react-router-dom";
+import { getProductById } from "../../services/product";
 import ProductCard from "../../components/ProductCard";
+import Card from "../../components/Card";
+import Navbar from '../../components/Navbar';
+import styles from './Product.module.scss'
 
 const Product = () => {
+  const { id } = useParams();
+  const [items, setItems] = useState([]);
 
-    const { id } = useParams();
-    const [product, setProduct] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getProductById(id);
+      setItems(data);
+    };
+    getData();
+  }, []);
 
-    const fetchItem = async() => {
-        const data = await getProductById(id)
-        setProduct(data);
-    }
-
-    useEffect(() =>{
-      fetchItem();
-    },[]);
-
-    return (
-        <>
-        <div>
-            {product.map((item) => {
-                return <ProductCard key={item.id} product={item} />;
+  return (
+    <>
+        <Navbar />
+        
+        <div className={styles.item_container}>
+            {items.map((product) => {
+            return <Card key={product.id} products={product} />;
             })}
         </div>
-        </>
-    );
+    </>
+  );
 };
 
-export default Product
+export default Product;
+
+
+{/* <div className={styles.Grid}>
+{items.map((product) => {
+    return <Card key={product.id} products={product}/>;
+})}
+</div> */}

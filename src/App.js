@@ -5,31 +5,25 @@ import "./App.module.scss";
 
 import Home from "./containers/Home";
 import Cart from "./containers/Cart";
+import Product from "./containers/Product"
 
 import { React } from "react";
 
 const App = () => {
-
   return (
-
     <Router>
-
-        <CartProvider>
-        
+      <CartProvider>
         <Switch>
-
           <Route exact path="/" component={Home}></Route>
 
-          <Route exact path="/products/:id"></Route>
+          <Route path="/products/:id">
+            <Product/>
+          </Route>
 
           <Route path="/cart" component={Cart}></Route>
-
         </Switch>
-
-        </CartProvider>
-
-      </Router>
-
+      </CartProvider>
+    </Router>
   );
 };
 

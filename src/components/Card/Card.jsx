@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Card.module.scss";
 import { addToCart } from "../../services/cart";
+import { Link } from 'react-router-dom'
 
 
 const Card = ( {products} ) => {
@@ -20,8 +21,7 @@ const Card = ( {products} ) => {
         <div className={styles.Card_Container}>
             <img src='https://via.placeholder.com/150'></img>
           <div className={styles.Card_Content}>
-            <div>{products.id} </div>
-            <div>{products.name}</div>
+            <Link to={`/products/${products.id}`}>{products.name}</Link>
             <div>{products.variant}</div>
             <div>$ {products.price}</div>
           </div>
