@@ -1,5 +1,7 @@
 E-commerce project w/ react + firebase
 
+https://allinh1.github.io/ecom-project/
+
 # Ecommerce React Project
 
 ## Core (required):
